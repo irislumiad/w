@@ -43,20 +43,29 @@ public class QrActivity extends AppCompatActivity {
         startActivity(intent);
         */
         //----------------- SharePreferences 사용 (내부 저장소에 값 저장)----------------
-        sp = getSharedPreferences("temp", MODE_PRIVATE); // 선언
+            String a = str.substring(8, 12);
+            sp = getSharedPreferences("temp"+a, MODE_PRIVATE); // 선언
+
+
+        //sp = getSharedPreferences("temp", MODE_PRIVATE); // 선언
 
         editor = sp.edit(); // editor에 put 하기
+
+
         editor.putString("address", str.substring(0, 7)); // RoomNumber라는 key값에 데이터를 저장한다.
-        editor.putString("roomNumber", str.substring(9, 12));
+        editor.putString("roomNumber", str.substring(8, 12));
         editor.putString("deposit", str.substring(14, 18));
         editor.putString("rent", str.substring(20, 22));
         editor.putString("cost", str.substring(24, 26));
+        editor.putString("phone", str.substring(27, 33));
 
 
 
         editor.commit();
 
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("name",a);
+
         startActivity(intent);
         //------------------------------------------------------------------------------
 
